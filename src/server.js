@@ -33,8 +33,10 @@ app.post('/pokemons', (req, res) => {
     //recebe o objeto que queremos cadastrar, queremos pegar o corpo da requicao.
     const pokemon = dataBase.salvarPokemons({
         nome: req.body.nome,
-        tipo: req.body.tipo
-
+        tipo: req.body.tipo,
+        fraqueza: req.body.fraqueza,
+        resistencia: req.body.resistencia,
+        hp : 100
     })
     //a linha abaixo, retorna se o cadastro foi feito corretamente
     res.send(pokemon);
@@ -44,6 +46,9 @@ app.put('/pokemons/:id', (req, res) => {
     const pokemon = dataBase.atualizarPokemon(req.params.id, {
         nome: req.body.nome,
         tipo: req.body.tipo,
+        fraqueza: req.body.fraqueza,
+        resistencia: req.body.resistencia,
+        hp : 100,
         //converte os dados do parênteses para número
         id: parseInt(req.params.id)
     })
@@ -57,7 +62,14 @@ app.delete('/pokemons/:id', (req, res) => {
     
 });
 
+app.post('/batalha', (req,res) =>{
+    res.send(dataBase.batalhaPokemon(req.body.id1, req.body.id2))
+})
 
+app.get('/cura/:id', (req,res) => {
+    //res.send(dataBase.curaPokemon(req.params.id))
+    res.send(dataBase.curaPokemon(req.params.id)); 
+})
 //para rodar o servidor 
 
 app.listen(3003);

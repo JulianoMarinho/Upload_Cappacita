@@ -47,5 +47,56 @@ function deletarPokemon(id){
     })
     return pokemonDeletado
 }
+
+function batalhaPokemon(id1, id2){
+    const superEfetivo = 40;
+    const Efetivo = 20;
+    const naoEfetivo = 10;
+    //variavel recebe o parametro do id passado
+    const pokemon1 = pokemons[id1];
+    const pokemon2 = pokemons[id2];
+
+    //batalha
+    if(pokemon1.hp != 0 && pokemon2 != 0){
+        if(pokemon1.tipo == pokemon2.fraqueza){
+            pokemon2.hp = pokemon2.hp - superEfetivo;
+        }else if(pokemon1.tipo == pokemon2.resistencia){
+            pokemon2.hp = pokemon2.hp - naoEfetivo;
+        }else{
+            pokemon2.hp = pokemon2.hp - Efetivo;
+        }
+    }
+
+    if(pokemon1.hp != 0 && pokemon2 != 0){
+        if(pokemon2.tipo == pokemon1.fraqueza){
+            pokemon1.hp = pokemon1.hp - superEfetivo;
+        }else if(pokemon2.tipo == pokemon1.resistencia){
+            pokemon1.hp = pokemon1.hp - naoEfetivo;
+        }else{
+            pokemon1.hp = pokemon1.hp - Efetivo;
+        }
+    }
+
+    if(pokemon1.hp < 0) pokemon.hp = 0;
+    if(pokemon2.hp < 0) pokemon.hp = 0;
+    
+    return `${pokemon1.nome}: ${pokemon1.hp} / ${pokemon2.nome}: ${pokemon2.hp} `   
+
+}
+
+function curaPokemon(id){
+    const potion = 20;
+    const pokemonFerido = pokemons[id];
+    if(pokemonFerido.hp == 100){
+       return `O Pokemon ${pokemonFerido.nome}, está com o HP cheio!`
+    }else if(pokemonFerido.hp < 80){
+       pokemonFerido.hp = pokemonFerido.hp + potion;
+    }else{
+       pokemonFerido.hp = 100;
+    }
+
+    return `${pokemonFerido.hp} teste`
+}
+
 //essa linha exporta os dados para nosso servidor
-module.exports = { salvarPokemons, mostrarPokemon, mostrarPokemons,atualizarPokemon,deletarPokemon};
+module.exports = { salvarPokemons, mostrarPokemon, mostrarPokemons,atualizarPokemon,deletarPokemon,batalhaPokemon, curaPokemon};
