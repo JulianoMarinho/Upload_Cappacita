@@ -59,26 +59,32 @@ function batalhaPokemon(id1, id2){
     //batalha
     if(pokemon1.hp != 0 && pokemon2 != 0){
         if(pokemon1.tipo == pokemon2.fraqueza){
+            //pokemon2.hp >= 40 ? pokemon2.hp - superEfetivo : pokemon2.hp = 0
             pokemon2.hp = pokemon2.hp - superEfetivo;
         }else if(pokemon1.tipo == pokemon2.resistencia){
             pokemon2.hp = pokemon2.hp - naoEfetivo;
+            //pokemon2.hp >= 10 ? pokemon2.hp - naoEfetivo : pokemon2.hp = 0
         }else{
             pokemon2.hp = pokemon2.hp - Efetivo;
+            //pokemon2.hp >= 20 ? pokemon2.hp - Efetivo : pokemon2.hp = 0
         }
     }
 
     if(pokemon1.hp != 0 && pokemon2 != 0){
         if(pokemon2.tipo == pokemon1.fraqueza){
             pokemon1.hp = pokemon1.hp - superEfetivo;
+            //pokemon1.hp >= 40 ? pokemon1.hp - superEfetivo : pokemon1.hp = 0
         }else if(pokemon2.tipo == pokemon1.resistencia){
             pokemon1.hp = pokemon1.hp - naoEfetivo;
+            //pokemon1.hp >= 10 ? pokemon1.hp - superEfetivo : pokemon1.hp = 0
         }else{
             pokemon1.hp = pokemon1.hp - Efetivo;
+            //pokemon1.hp >= 20 ? pokemon1.hp - superEfetivo : pokemon1.hp = 0
         }
     }
 
-    if(pokemon1.hp < 0) pokemon.hp = 0;
-    if(pokemon2.hp < 0) pokemon.hp = 0;
+      if(pokemon1.hp < 0) pokemon1.hp = 0;
+      if(pokemon2.hp < 0) pokemon2.hp = 0;
     
     return `${pokemon1.nome}: ${pokemon1.hp} / ${pokemon2.nome}: ${pokemon2.hp} `   
 
@@ -95,7 +101,7 @@ function curaPokemon(id){
        pokemonFerido.hp = 100;
     }
 
-    return `${pokemonFerido.hp} teste`
+    return `${pokemonFerido.nome}: ${pokemonFerido.hp} `
 }
 
 //essa linha exporta os dados para nosso servidor
